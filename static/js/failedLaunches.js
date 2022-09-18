@@ -20,3 +20,149 @@
 //         ...
 //     ]
 // }
+
+function createOptions(parent_id, index){
+    var parent_tag = document.getElementById(parent_id);
+    parent_tag.innerHTML += '<option id=' + '"' + parent_id + index.toLocaleString() + '"' + '></option>';
+}
+
+function setOptions(id, name, value){
+    var option = document.getElementById(id);
+    option.value += value
+    option.innerHTML += name
+}
+
+async function extractFailures(id){
+
+    var launch_query = `https://api.spacexdata.com/v4/launches/query`;
+    var selected_launchpad_name = document.getElementById("launch-pad-select").options[document.getElementById("launch-pad-select").selectedIndex].text
+
+    var query_request = {
+        "query": {
+            "launchpad": id,
+            "success": false
+        },
+        "options": {
+            "select": {
+                "failures": 1,
+                "name": 1
+            }
+        }
+    };
+
+    let failures = await fetch(launch_query, {
+            method: "POST",
+            mode: 'cors',
+            body: JSON.stringify(query_request),
+            cache: "no-cache",
+            headers: new Headers({
+                "content-type": "application/json"
+            })
+    })
+    .then(async function (response) {
+        if(response.status !== 200){
+            console.log(`Error : ${response.status}`)
+            return;
+        }
+        var failures = await response.json().then(function (data){
+            data = JSON.stringify(data);
+            data = JSON.parse(data);
+
+            var docs = data.docs;
+            
+            var all_failures = [];
+
+            for(doc of docs){
+                console.log();
+                all_failures.push({
+                    "name": doc.name,
+                    "failure": doc.failures[0].reason
+                });
+            }
+
+            var result = {
+                "launchpad": selected_launchpad_name,
+                "launchpad_id": id,
+                "all_failures": all_failures
+            };
+
+            return result;
+        })
+
+        return failures;
+    });
+
+    return failures;
+}
+
+async function get_list_of_launchpads(){
+    
+    var p_tag = document.getElementById('p-tag');
+    var select_id = "launch-pad-select"
+
+    LAUNCHPAD_API = `https://api.spacexdata.com/v4/launchpads`
+
+    let launch_dict = await fetch(LAUNCHPAD_API, {
+            method: "GET",
+            mode: 'cors',
+            cache: "no-cache",
+            headers: new Headers({
+                "content-type": "application/json"
+            })
+    })
+    .then(async function (response) {
+        if(response.status !== 200){
+            console.log(`Error : ${response.status}`)
+            return;
+        }
+        var launchpad_names = await response.json().then(function (data){
+            data = JSON.stringify(data);
+            data = JSON.parse(data);
+            
+            var names = new Array(data.length);
+            var launchpad_ids = new Array(data.length);
+            var pad_to_launches = {}
+
+            for(i=0;i<data.length;i++){
+                names[i] = data[i]['name']
+                launchpad_ids[i] = data[i]['id']
+                pad_to_launches[launchpad_ids[i]] = data[i]['launches']
+            }
+
+            return {
+                'names': names,
+                'ids': launchpad_ids,
+                'launches': pad_to_launches
+            };
+        })
+        
+        return launchpad_names;
+    });
+    
+    for(i=1; i<=launch_dict.names.length; i++){
+        createOptions(select_id, i-1);
+    }
+
+    for(i=1; i<=launch_dict.names.length; i++){
+        setOptions(select_id + (i-1).toLocaleString(), launch_dict.names[i-1], launch_dict.ids[i-1])
+    }
+
+    return launch_dict;
+}
+
+window.onload = async function fetchLaunchpads(){
+
+    var launch_dict = await get_list_of_launchpads();
+    
+    var form = document.getElementById('launchpad-form');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        var selected_launchpad_id = document.getElementById("launch-pad-select").value
+        
+        var failures = await extractFailures(selected_launchpad_id);
+
+        console.log(failures);
+    });
+}
