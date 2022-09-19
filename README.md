@@ -1,20 +1,21 @@
 # ASSIGNMENT FOR NEVERINSTALL
 
 ## PROJECT STRUCTURE
-
-	- Assignment
-		- static
-			- css
-				- failedLaunches.css
-				- starlink.css
-			- js
-				- failedLaunches.js
-				- starlink.js
-		- launches.json
-		- starlink.json
-		- launchpads.json
-		- failedLaunches.html
-		- starlink.html
+```
+	|--Assignment
+	|	|-- static
+	|	|	|-- css
+	|	|	|	|-- failedLaunches.css
+	|	|	|	|-- starlink.css
+	|	|	|-- js
+	|	|		|-- failedLaunches.js
+	|	|		|-- starlink.js
+	|	|-- launches.json
+	|	|-- starlink.json
+	|	|-- launchpads.json
+	|	|-- failedLaunches.html
+	|	|-- starlink.html
+```
 
 ### PROBLEMS DEFINED
 #### PROBLEM 1
