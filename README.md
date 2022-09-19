@@ -23,7 +23,7 @@ Find all the failure launches for a given Launchpad using the SPACE-X API.
 
 This function accepts an `id` of a `launchpad` as an argument, and returns information about failed `launches`
 
-Assumptions and Technical Decisions:
+##### Assumptions and Technical Decisions:
 ```
 	1. Since, the user can't exactly know the ID of the launchpad, I performed two calls to the API.
 		1. First one to fetch all the launch pads for the user to choose from
@@ -36,7 +36,7 @@ Fetch all starlink satellites using SPACE-X-STARLINK API and write a function th
 
 The return value of this function should make it possible to look up all starlink satellites launched on a specific `year`, `month`, and/or `date` in a performant way.
 
-Assumptions and Technical Decisions:
+##### Assumptions and Technical Decisions:
 ```
 	1. After going through the SPACE-X API repo, I have also found other API calls which involved response to QUERY POST calls. The query is a valid MongoDB.find() query. Instead of fetching all contents (which the given API does [https://api.spacexdata.com/v4/starlink]), I have used the query API for faster response times.
 	2. The date entered must be validated before performing the query. So, in order to find if the entered date is valid or not, I have checked the following conditions
