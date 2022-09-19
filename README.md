@@ -40,10 +40,9 @@ The return value of this function should make it possible to look up all starlin
 
 ##### Assumptions and Technical Decisions:
 ```
-1. After going through the SPACE-X API repo, I have also found other API calls which involved response to QUERY POST calls. 
-The query is a valid MongoDB.find() query. Instead of fetching all contents (which the given API does [https://api.spacexdata.com/v4/starlink]), 
-I have used the query API for faster response times.
-2. The date entered must be validated before performing the query. So, in order to find if the entered date is valid or not, 
+1. After going through the SPACE-X API repo, I have also found other API calls which involved response to QUERY POST calls. The query is a valid MongoDB.find() query. Instead of fetching all contents (which the given API does [https://api.spacexdata.com/v4/starlink]), I have used the query API for faster response times.
+2. Since the number of entries returned can be large, I have chose to make the API calls using pagination. i.e., I make an API call to fetch limited data to be displayed based on page number, using the options within the query.
+3. The date entered must be validated before performing the query. So, in order to find if the entered date is valid or not, 
 I have checked the following conditions
 	1. Check if year is leap or not
 	2. Check for February month incase it's leap year
