@@ -1,25 +1,29 @@
-// First find all the launchpads and present them to the user to select the launchpad of choice for which he/she wants to see the results
-// Perform a search for all the launches done on the selected launchpad such that success == FALSE and fetch the following values.
-// 1. NAME: "NAME OF THE LAUNCH"
-// 2. FAILURE : "REASON FOR FAILURE"
-// Perform search for all the failures on the given launch pad and present the results.
-
-// STEPS FOR CODING
-// 1. SELECT ALL THE LAUNCHPADS ID's and present them to the user for selection of one.
-// 2. AFTER SELECTION, PERFORM QUERY TO FETCH ALL THE LAUNCHES FOR WHICH SUCCESS == FALSE.
-// 3. FETCH ONLY THE NAME AND THE FAILURE REASON FOR EVERY SUCH LAUNCH AND COMBINE THEM INTO A NEW ARRAY
-// 4. RETURN THE RESULT OF THE FUNCTION IN THE FOLLOWING FORMAT
-// LAUNCH PAD ID
-// {
-//     "LAUNCH PAD NAME": "NAME OF LAUNCHPAD",
-//     "ALL FAILURES": [
-//         {
-//             "NAME": "LAUNCH NAME",
-//             "REASON": "REASON FOR FAILURE"
-//         }
-//         ...
-//     ]
-// }
+/**
+ * # FIND ALL THE FAILURE LAUNCHES FOR A GIVEN LAUNCH PAD
+ *  First find all the launchpads and present them to the user to select the launchpad of choice for which he/she wants to see the results
+ *  Perform a search for all the launches done on the selected launchpad such that success == FALSE and fetch the following values.
+ *  1. NAME: "NAME OF THE LAUNCH"
+ *  2. FAILURE : "REASON FOR FAILURE"
+ *  Perform search for all the failures on the given launch pad and present the results.
+ * 
+ *  STEPS FOR CODING
+ *  1. SELECT ALL THE LAUNCHPADS ID's and present them to the user for selection of one.
+ *  2. AFTER SELECTION, PERFORM MONGODB QUERY TO FETCH ALL THE LAUNCHES OF A GIVEN LAUNCHPAD FOR WHICH SUCCESS == FALSE.
+ *  3. FETCH ONLY THE NAME AND THE FAILURE REASON FOR EVERY SUCH LAUNCH AND COMBINE THEM INTO A NEW ARRAY
+ *  4. RETURN THE RESULT OF THE FUNCTION IN THE FOLLOWING FORMAT
+ *  
+ *  LAUNCH PAD ID
+    {
+        "LAUNCH PAD NAME": "NAME OF LAUNCHPAD",
+        "ALL FAILURES": [
+            {
+                "NAME": "LAUNCH NAME",
+                "REASON": "REASON FOR FAILURE"
+            }
+            ...
+        ]
+    }
+*/
 
 function createOptions(parent_id, index){
     var parent_tag = document.getElementById(parent_id);
@@ -46,7 +50,8 @@ async function extractFailures(id){
             "select": {
                 "failures": 1,
                 "name": 1
-            }
+            },
+            "pagination": false
         }
     };
 
@@ -150,6 +155,31 @@ async function get_list_of_launchpads(){
     return launch_dict;
 }
 
+function BuildTable(data){
+
+    var table = document.getElementById("result-table");
+
+    table.innerHTML = `<tr>
+                        <th>NAME</th>
+                        <th>REASON FOR FAILURE</th>
+                    </tr>`
+    
+    if(data.length != 0){
+        for(i=0;i < data.length; i++){
+            var row = `<tr>
+                <td>${data[i].name}</td>
+                <td>${data[i].failure}</td>
+            </tr>`
+
+            table.innerHTML += row;
+        }
+    }
+
+    else{
+        table.innerHTML = `<p>No records found</p>`;
+    }
+}
+
 window.onload = async function fetchLaunchpads(){
 
     var launch_dict = await get_list_of_launchpads();
@@ -164,5 +194,10 @@ window.onload = async function fetchLaunchpads(){
         var failures = await extractFailures(selected_launchpad_id);
 
         console.log(failures);
+
+        var docs = failures.all_failures;
+
+        console.log(docs);
+        BuildTable(docs);
     });
 }

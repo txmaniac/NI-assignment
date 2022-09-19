@@ -1,15 +1,40 @@
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed&family=Nunito:ital,wght@1,300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        
+        <link rel="stylesheet" href="static/css/starlink.css">
         <script src="static/js/starlinkSearch.js"></script>
     </head>
     <body>
-
-        <form action="" id="starlink-form" method="get">
-            <input type="text" name="year" id="year" placeholder="YYYY">
-            <input type="text" name="month" id="month" placeholder="MM">
-            <input type="text" name="day" id="day" placeholder="DD">
-            
-            <input type="submit" value="Show">
-        </form>
+        <div class="main" id="main">
+            <h1 class="heading">Fetch details of all Starlink satellites launched given YYYY-MM-DD</h1>
+            <form action="" class="starlink-form" id="starlink-form" method="get">
+                <div class="date-div">
+                    <label for="year">
+                        <p>Enter Year</p>
+                    </label>
+                    <input type="text" name="year" id="year" class="date-field" placeholder="YYYY" >
+                    <label for="month">
+                        <p>Enter Month</p>
+                    </label>
+                    <input type="text" name="month" id="month" class="date-field" placeholder="MM">
+                    <label for="day">
+                        <p>Enter Day</p>
+                    </label>
+                    <input type="text" name="day" id="day" class="date-field" placeholder="DD">
+                </div>
+                <input type="submit" value="Show Results" class="submit-container-button">
+            </form>
+    
+            <table class="table">
+                <tbody id="result-table"></tbody>
+            </table>
+        </div>
     </body>
 </html>

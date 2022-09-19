@@ -1,0 +1,138 @@
+* {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px;
+}
+
+html {
+    margin: auto;
+    padding: 0px;
+    border: 0px;
+    background-color: rgb(209, 211, 216);
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+
+body {
+    margin: auto;
+    font-family: 'Barlow Condensed', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+
+.main{
+    padding: 5px;
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 5px 0px #9c9c9c;
+    border-radius: 5px;
+}
+
+.date-div{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.nav-div{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.starlink-form{
+    padding: 10px;
+    display:flex;
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.heading{
+    margin: 50px;
+}
+.submit-container-button {
+    margin: 25px;
+    color: #ffffff;
+    width: fit-content;
+    height: fit-content;
+    border: none;
+    outline: 0px;
+    padding: 10px;
+    border-radius: 2.5px;
+    background-color: rgb(39, 198, 226);
+    box-shadow: 0px 0px 5px 0px #0962e7;
+    transition: background .2s;
+}
+
+.submit-container-button:hover {
+    background-color: rgb(24, 131, 231);
+}
+
+.table td, .table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+.table tr:nth-child(even){background-color: #f2f2f2;}
+
+.table tr:hover {background-color: #ddd;}
+
+.table th {
+padding-top: 12px;
+padding-bottom: 12px;
+text-align: left;
+background-color: #0a0a0c;
+color: white;
+}
+
+#prev-page {
+    color: #ffffff;
+    width: fit-content;
+    height: fit-content;
+    border: none;
+    outline: 0px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 2.5px;
+    background-color: rgb(39, 198, 226);
+    box-shadow: 0px 0px 5px 0px #0962e7;
+    transition: background .2s;
+}
+
+#prev-page:hover {
+    background-color: rgb(24, 131, 231);
+}
+
+#next-page {
+    color: #ffffff;
+    width: fit-content;
+    height: fit-content;
+    border: none;
+    outline: 0px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 2.5px;
+    background-color: rgb(39, 198, 226);
+    box-shadow: 0px 0px 5px 0px #0962e7;
+    transition: background .2s;
+}
+
+#next-page:hover {
+    background-color: rgb(24, 131, 231);
+}
+
+.date-field{
+    width: 100px;
+    height: fit-content;
+    outline: 0px;
+    padding: 10px;
+    margin: 10px;
+}
