@@ -2,7 +2,6 @@
 
 ## PROJECT STRUCTURE
 
-"""
 	- Assignment
 		- static
 			- css
@@ -16,7 +15,6 @@
 		- launchpads.json
 		- failedLaunches.html
 		- starlink.html
-"""
 
 ### PROBLEMS DEFINED
 #### PROBLEM 1
