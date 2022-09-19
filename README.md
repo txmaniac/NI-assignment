@@ -47,7 +47,7 @@ I have checked the following conditions
 	3. Pad month and date values to ensure the date is in YYYY-MM-DD format
 ```
 #### TO USE
-I have implemented two separate html files for the problems defined. For testing the results, just open the HTML file corresponding to the name of the problem.
+I have implemented two separate html files for the problems defined. For testing the results, clone this repo as is and just open the HTML file corresponding to the name of the problem.
 ```
 	1. failedLaunches.html - PROBLEM 1
 	2. starlink.html - PROBLEM 2
