@@ -5,11 +5,11 @@
 	|--Assignment
 	|	|-- static
 	|	|	|-- css
-	|	|	|	|-- failedLaunches.css
-	|	|	|	|-- starlink.css
+	|	|	|    |-- failedLaunches.css
+	|	|	|    |-- starlink.css
 	|	|	|-- js
-	|	|		|-- failedLaunches.js
-	|	|		|-- starlink.js
+	|	|	     |-- failedLaunches.js
+	|	|	     |-- starlink.js
 	|	|-- launches.json
 	|	|-- starlink.json
 	|	|-- launchpads.json
